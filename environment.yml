@@ -10,14 +10,15 @@ dependencies:
   - torchaudio
   - pytorch-cuda=11.8
   - cudatoolkit=11.8
-  - pandas
+  - pandas=2.1.4
+  - pyarrow=13.0.0
   - pandas-ta
   - jupyterlab
-  - pyarrow
-  - pip
   - scikit-learn
+  - pip
   - pip:
       - ccxt
       - optuna
+      - optuna-dashboard
       - tqdm
       - matplotlib
