@@ -1,11 +1,11 @@
+import os
 import time
 
 import optuna
 
 
 def monitor_optuna_progress(storage_url: str, study_name: str, interval_seconds: int = 30):
-    """
-    Live terminal monitor for Optuna optimization progress.
+    """Live terminal monitor for Optuna optimization progress.
 
     Args:
         storage_url (str): The Optuna database URL.
@@ -16,14 +16,14 @@ def monitor_optuna_progress(storage_url: str, study_name: str, interval_seconds:
     including counts of trial states and best trial metrics.
     """
 
-    print("Optuna Trial Monitor Running...")
-    print("Press Ctrl+C to stop monitoring.")
-
     try:
         # Load the study from the specified storage backend
         study = optuna.load_study(storage=storage_url, study_name=study_name)
 
         while True:
+            # Clear terminal screen for updated output
+            os.system("clear" if os.name == "posix" else "cls")
+
             # Categorize trial statuses
             trials = study.trials
             completed = [t for t in trials if t.state == optuna.trial.TrialState.COMPLETE]
@@ -31,7 +31,7 @@ def monitor_optuna_progress(storage_url: str, study_name: str, interval_seconds:
             running = [t for t in trials if t.state == optuna.trial.TrialState.RUNNING]
             waiting = [t for t in trials if t.state == optuna.trial.TrialState.WAITING]
 
-            print("\n" + "=" * 80)
+            print("=" * 80)
             print(f"Study: {study.study_name}")
             print(f"Total Trials: {len(trials)}")
             print(f"Completed: {len(completed)} | Running: {len(running)} | Waiting: {len(waiting)} | Failed: {len(failed)}")
