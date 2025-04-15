@@ -1,0 +1,23 @@
+name: coin-bot
+channels:
+  - nvidia
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pytorch=2.1
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.8
+  - cudatoolkit=11.8
+  - pandas
+  - pandas-ta
+  - jupyterlab
+  - pyarrow
+  - pip
+  - scikit-learn
+  - pip:
+      - ccxt
+      - optuna
+      - tqdm
+      - matplotlib

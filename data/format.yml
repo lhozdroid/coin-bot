@@ -1,0 +1,22 @@
+input_file: data.csv              # file to read the raw information
+output_features: features.npy     # output file of features
+output_labels: labels.npy         # output file of labels
+
+window_size: 72                   # 6h @ 5m
+prediction_offset: 1              # look 1 candle ahead
+
+thresholds:
+  up: 0.005                       # +0.5%
+  down: -0.005                    # -0.5%
+
+ta_windows:
+  squeeze: 20                     # squeeze momentum
+  bb_std: 2.0                     # bollinger bands
+  kc_mult: 1.5                    # keltner bands
+
+  momentum: 14                    # momentum
+  atr: 6                          # average true range
+  roc: 6                          # rate of change
+  adx: 14                         # trend strength
+  vwap: 36                        # volume weighted average price
+  volume_z: 6                     # normalized volume
