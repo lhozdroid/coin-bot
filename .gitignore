@@ -1,0 +1,73 @@
+# === Python build and cache ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.npy
+*.npz
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dll
+*.dylib
+*.o
+*.a
+
+# Jupyter/IPython
+.ipynb_checkpoints
+
+# === Conda / Virtualenv ===
+.env/
+.venv/
+env/
+venv/
+*.env
+*.venv
+
+# === IntelliJ IDEA / PyCharm ===
+.idea/
+*.iml
+*.iws
+out/
+
+# === Data artifacts ===
+data/*.npy
+data/*.csv
+data/*.parquet
+
+# === Model artifacts ===
+*.pt
+checkpoints/
+model_checkpoint.pt
+optuna_temp.pt
+
+# === Zip and script outputs ===
+*.zip
+*.sh~
+
+# === Optuna studies ===
+optuna_study.db
+optuna_results.csv
+
+# === OS generated files ===
+.DS_Store
+Thumbs.db
+
+# === Logs and debug ===
+*.log
+logs/
+debug/
+
+# === Pytest ===
+.cache/
+.tox/
+
+# === MyPy / coverage ===
+.mypy_cache/
+coverage.xml
+htmlcov/
