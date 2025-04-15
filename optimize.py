@@ -97,7 +97,7 @@ if __name__ == "__main__":
     study = optuna.create_study(study_name="optimize", direction="minimize", storage=storage_url, load_if_exists=True, )
 
     n_trials = 500
-    n_jobs = 6
+    n_jobs = 2
 
     study.optimize(objective, n_trials=n_trials, n_jobs=n_jobs)
 
