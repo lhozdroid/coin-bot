@@ -25,7 +25,7 @@ class SqueezeMomentumTransformer(nn.Module):
         self.use_layernorm = config["use_layernorm"]
         self.classifier_hidden_layers = config["classifier_hidden_layers"]
         self.num_classes = config["number_of_classes"]
-        self.initializer = config["initializer"]
+        self.initializer = config.get("initializer", "xavier")
 
         # Projects the input features to the model dimension [batch_size, seq_len, d_model]
         self.input_proj = nn.Linear(self.input_size, self.d_model)

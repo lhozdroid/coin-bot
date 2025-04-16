@@ -1,0 +1,104 @@
+# === Fixed Settings ===
+study_name: optimize
+storage: sqlite:///optimize/optimize.db
+n_trials: 100
+n_jobs: 2
+checkpoint_path: optimize/optuna_temp.pt
+device: cuda
+
+# === Search Space ===
+search_space:
+
+  # Architecture
+  model_dimension:
+    type: categorical
+    values: [64, 128, 256]
+
+  number_of_heads:
+    type: categorical
+    values: [2, 4, 8]
+
+  number_of_layers:
+    type: int
+    low: 1
+    high: 4
+
+  feedforward_dimension:
+    type: int
+    low: 128
+    high: 512
+    step: 64
+
+  dropout_rate:
+    type: float
+    low: 0.0
+    high: 0.3
+
+  n_hidden_layers:
+    type: int
+    low: 1
+    high: 3
+
+  classifier_hidden_layer:
+    type: int
+    low: 32
+    high: 256
+    step: 32
+
+  # Training dynamics
+  learning_rate:
+    type: float
+    low: 1e-5
+    high: 5e-3
+    log: true
+
+  epochs:
+    type: int
+    low: 10
+    high: 40
+
+  # Scheduler
+  scheduler_type:
+    type: categorical
+    values: [cosine, plateau]
+
+  eta_min:
+    type: float
+    low: 1e-6
+    high: 1e-3
+    log: true
+
+  # Labeling / Targeting
+  window_size:
+    type: int
+    low: 48
+    high: 96
+
+  prediction_offset:
+    type: int
+    low: 1
+    high: 12
+
+  threshold_up:
+    type: float
+    low: 0.002
+    high: 0.01
+
+  threshold_down:
+    type: float
+    low: -0.01
+    high: -0.002
+
+  # Loss / Initialization
+  initializer:
+    type: categorical
+    values: [xavier, kaiming]
+
+  loss_function:
+    type: categorical
+    values: [cross_entropy, focal, label_smoothing]
+
+  # Training size
+  batch_size:
+    type: categorical
+    values: [ 32, 64, 128 ]

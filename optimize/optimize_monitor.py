@@ -1,11 +1,21 @@
+# Ensures that the script can be run from any working directory by setting up the root path
 import os
-import time
+import sys
 
+# Compute the root path relative to this file's location
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+# Add root to sys.path if not already present
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+import time
 import optuna
 
 
 def monitor_optuna_progress(storage_url: str, study_name: str, interval_seconds: int = 30):
-    """Live terminal monitor for Optuna optimization progress.
+    """
+    Live terminal monitor for Optuna optimization progress.
 
     Args:
         storage_url (str): The Optuna database URL.
@@ -58,4 +68,5 @@ def monitor_optuna_progress(storage_url: str, study_name: str, interval_seconds:
 
 
 if __name__ == "__main__":
-    monitor_optuna_progress(storage_url="sqlite:///optimize/optimize.db", study_name="optimize", interval_seconds=20)
+    db_path = os.path.join(ROOT_DIR, "optimize", "optimize.db")
+    monitor_optuna_progress(storage_url=f"sqlite:///{db_path}", study_name="optimize", interval_seconds=20)

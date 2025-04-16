@@ -1,34 +1,15 @@
 # === Input Dimensions ===
-input_size: 14                        # Number of features per time step (OHLCV + indicators)
-sequence_length: 72                   # Number of time steps (6 hours of 5-minute candles)
+input_size: 14                          # Number of features per time step (OHLCV + indicators)
+sequence_length: 72                     # Number of time steps (6 hours of 5-minute candles)
 
 # === Transformer Encoder ===
-model_dimension: 64                   # Dimension of embedding space (d_model)
-number_of_heads: 4                    # Number of attention heads
-number_of_layers: 2                   # Transformer encoder layers
-feedforward_dimension: 128            # Inner feedforward network size
-dropout_rate: 0.1                     # Dropout rate
-use_layernorm: true                   # Apply LayerNorm after positional encoding
+model_dimension: 128                    # Size of transformer hidden state
+number_of_heads: 4                      # Attention heads (128 / 4 = 32)
+number_of_layers: 3                     # Transformer encoder layers
+feedforward_dimension: 256              # Feedforward sublayer dimension
+dropout_rate: 0.1                       # Dropout used inside the model (not optimizer)
+use_layernorm: true                     # Whether to use LayerNorm after embedding
 
 # === Classifier Head ===
-classifier_hidden_layers: [64, 32]    # Sizes of hidden layers in classifier head
-number_of_classes: 3                  # Output logits (buy/sell/hold)
-
-# === Initialization & Training ===
-initializer: xavier                   # One of: xavier, kaiming
-loss_function: cross_entropy          # One of: cross_entropy, focal, label_smoothing
-
-# === Learning Rate Scheduler ===
-scheduler:
-  type: cosine_warm_restart           # Options: cosine, cosine_warm_restart, plateau, step
-  t_0: 10                             # Number of epochs in the first cycle
-  t_mult: 2                           # Multiply cycle length by this value after each restart
-  eta_min: 1e-5                       # Minimum learning rate after decay
-
-# === Runtime ===
-device: cuda                          # Options: 'cuda' or 'cpu'
-
-# === Early Stop ===
-early_stopping:
-  patience: 5                         # Number of epochs with no improvement before stopping
-  delta: 0.0001                       # Minimum change to qualify as improvement
+classifier_hidden_layers: [ 128, 64 ]   # MLP layers after transformer output
+number_of_classes: 3                    # Output logits (buy/sell/hold)

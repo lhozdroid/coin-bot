@@ -1,3 +1,14 @@
+# Ensures that the script can be run from any working directory by setting up the root path
+import os
+import sys
+
+# Compute the root path relative to this file's location
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+# Add root to sys.path if not already present
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime

@@ -107,19 +107,19 @@ def evaluate(model, dataloader, criterion, device):
     return avg_loss, accuracy, all_preds, all_labels
 
 
-def train_model(model, train_loader, val_loader, test_loader, config):
+def train_model(model, train_loader, val_loader, test_loader, config, on_epoch_end=None):
     """
     Training loop for the full training process
-
     Args:
         model:
         train_loader:
         val_loader:
         test_loader:
         config:
+        on_epoch_end:
 
     Returns:
-        None
+
     """
     device = torch.device(config.get("device", "cuda"))
     model.to(device)
@@ -129,7 +129,6 @@ def train_model(model, train_loader, val_loader, test_loader, config):
     criterion = torch.nn.CrossEntropyLoss()
 
     epochs = config.get("epochs", 50)
-    checkpoint_path = config.get("checkpoint_path", "model_checkpoint.pt")
 
     best_val_loss = float("inf")
     early_stop_counter = 0
@@ -149,11 +148,12 @@ def train_model(model, train_loader, val_loader, test_loader, config):
         print(f"  Train Loss: {train_loss:.4f} | Train Acc: {train_acc:.4f}")
         print(f"  Val   Loss: {val_loss:.4f} | Val   Acc: {val_acc:.4f}")
 
+        if on_epoch_end:
+            on_epoch_end(epoch, val_loss, val_acc)
+
         if val_loss < best_val_loss - delta:
             best_val_loss = val_loss
             early_stop_counter = 0
-            torch.save({"model_state_dict": model.state_dict(), "optimizer_state_dict": optimizer.state_dict(), "epoch": epoch, "val_loss": val_loss, "config": config}, checkpoint_path)
-            print("  Checkpoint saved.")
         else:
             early_stop_counter += 1
             if early_stop_counter >= patience:
