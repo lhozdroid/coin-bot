@@ -16,7 +16,7 @@ import yaml
 from sklearn.preprocessing import StandardScaler
 
 
-def load_config(path="data/format.yml"):
+def load_config(path="data/config.yml"):
     """
     Loads the data format configuration.
 
@@ -198,8 +198,8 @@ def main():
     X, y = generate_samples(df, feature_cols, config)
 
     print(f"Saving {len(X)} samples...")
-    np.save(config["output_features"], X)
-    np.save(config["output_labels"], y)
+    np.save(f"data/{config['output_features']}", X)
+    np.save(f"data/{config['output_labels']}", y)
 
     print("Data formatting complete.")
 

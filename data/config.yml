@@ -1,4 +1,4 @@
-input_file: data.csv              # file to read the raw information
+input_file: data/data.csv         # file to read the raw information
 output_features: features.npy     # output file of features
 output_labels: labels.npy         # output file of labels
 

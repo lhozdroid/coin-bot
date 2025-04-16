@@ -89,7 +89,7 @@ def objective(trial):
     base_config = load_yaml(os.path.join(ROOT_DIR, "model", "config.yml"))
 
     # Loads the optimization search space and fixed settings
-    optimize_config = load_yaml(os.path.join(ROOT_DIR, "optimize", "optimize.yml"))
+    optimize_config = load_yaml(os.path.join(ROOT_DIR, "optimize", "config.yml"))
 
     # Duplicates the base configuration to apply sampled overrides
     config = copy.deepcopy(base_config)
@@ -112,12 +112,6 @@ def objective(trial):
         "feedforward_dimension": sampled["feedforward_dimension"],  #
         "dropout_rate": sampled["dropout_rate"],  #
         "classifier_hidden_layers": classifier_hidden_layers,  #
-        "window_size": sampled["window_size"],  #
-        "prediction_offset": sampled["prediction_offset"],  #
-        "thresholds": {  #
-            "up": sampled["threshold_up"],  #
-            "down": sampled["threshold_down"]  #
-        },  #
         "initializer": sampled["initializer"],  #
         "loss_function": sampled["loss_function"],  #
         "learning_rate": sampled["learning_rate"],  #
@@ -180,7 +174,7 @@ if __name__ == "__main__":
     """
 
     # Loads fixed optimization settings
-    optimize_config = load_yaml(os.path.join(ROOT_DIR, "optimize", "optimize.yml"))
+    optimize_config = load_yaml(os.path.join(ROOT_DIR, "optimize", "config.yml"))
 
     # Ensures the checkpoint output path exists
     os.makedirs(os.path.dirname(optimize_config["checkpoint_path"]), exist_ok=True)

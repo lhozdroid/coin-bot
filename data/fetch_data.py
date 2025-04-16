@@ -149,7 +149,7 @@ def main():
     end_date = "2025-04-01"
     symbol = "BTC/USD"
     timeframe = "5m"
-    output_file = "data.csv"
+    output_file = "data/data.csv"
 
     # Obtains the data into memory
     candles = fetch_all_chunks_parallel(start_date=start_date, end_date=end_date, symbol=symbol, timeframe=timeframe, max_threads=5)

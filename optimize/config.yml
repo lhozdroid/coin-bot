@@ -68,27 +68,6 @@ search_space:
     high: 1e-3
     log: true
 
-  # Labeling / Targeting
-  window_size:
-    type: int
-    low: 48
-    high: 96
-
-  prediction_offset:
-    type: int
-    low: 1
-    high: 12
-
-  threshold_up:
-    type: float
-    low: 0.002
-    high: 0.01
-
-  threshold_down:
-    type: float
-    low: -0.01
-    high: -0.002
-
   # Loss / Initialization
   initializer:
     type: categorical
