@@ -3,7 +3,6 @@ study_name: optimize
 storage: sqlite:///optimize/optimize.db
 n_trials: 100
 n_jobs: 2
-checkpoint_path: optimize/optuna_temp.pt
 device: cuda
 
 # === Search Space ===

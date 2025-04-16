@@ -116,7 +116,6 @@ def objective(trial):
         "loss_function": sampled["loss_function"],  #
         "learning_rate": sampled["learning_rate"],  #
         "epochs": sampled["epochs"],  #
-        "checkpoint_path": optimize_config["checkpoint_path"],  #
         "scheduler": {  #
             "type": sampled["scheduler_type"],  #
             "t_0": 10,  #
@@ -175,9 +174,6 @@ if __name__ == "__main__":
 
     # Loads fixed optimization settings
     optimize_config = load_yaml(os.path.join(ROOT_DIR, "optimize", "config.yml"))
-
-    # Ensures the checkpoint output path exists
-    os.makedirs(os.path.dirname(optimize_config["checkpoint_path"]), exist_ok=True)
 
     # Creates or resumes an Optuna study
     study = optuna.create_study(  #
